@@ -19,3 +19,6 @@ The default EXPOSE 9092 was omitted as this can be easily changed in the server.
 * Then simply start the docker-compose setup: `docker compose up -d`
 
 The setup also includes a health indicator by the use of netcat.
+
+For connections from your dev machine you need to add `/etc/hosts` entries for kraft1, kraft2 and kraft3 targeting
+127.0.0.1. Then you can use `kraft1:9192,kraft2:9193,kraft3:9194` as your broker connection string.
