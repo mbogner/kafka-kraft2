@@ -14,6 +14,7 @@ services:
     healthcheck:
       test: nc -z kraft1 9192 || exit 1
       interval: 2s
+      timeout: 2s
       retries: 5
       start_period: 5s
     ports:
@@ -32,6 +33,7 @@ services:
     healthcheck:
       test: nc -z kraft2 9193 || exit 1
       interval: 2s
+      timeout: 2s
       retries: 5
       start_period: 5s
     ports:
@@ -50,6 +52,7 @@ services:
     healthcheck:
       test: nc -z kraft3 9194 || exit 1
       interval: 2s
+      timeout: 2s
       retries: 5
       start_period: 5s
     ports:
@@ -58,12 +61,17 @@ services:
   kafdrop:
     image: obsidiandynamics/kafdrop
     container_name: kafdrop
+    hostname: kafdrop
     ports:
       - "127.0.0.1:9000:9000"
     volumes:
       - /etc/localtime:/etc/localtime:ro
     depends_on:
       kraft1:
+        condition: service_healthy
+      kraft2:
+        condition: service_healthy
+      kraft3:
         condition: service_healthy
     environment:
       KAFKA_BROKERCONNECT: kraft1:9192,kraft2:9193,kraft3:9194
@@ -72,8 +80,142 @@ services:
     healthcheck:
       test: curl --fail --silent http://localhost:9000 --output /dev/null || exit 1
       interval: 5s
+      timeout: 2s
       retries: 20
       start_period: 10s
+
+  schema-registry:
+    image: confluentinc/cp-schema-registry
+    hostname: schema-registry
+    container_name: schema-registry
+    depends_on:
+      kraft1:
+        condition: service_healthy
+      kraft2:
+        condition: service_healthy
+      kraft3:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8081:8081"
+    environment:
+      # https://docs.confluent.io/platform/current/schema-registry/installation/config.html
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://kraft1:9192,PLAINTEXT://kraft2:9193,PLAINTEXT://kraft3:9194
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+    healthcheck:
+      test: curl --fail --silent http://localhost:8081/config --output /dev/null || exit 1
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+
+  ksqldb-server:
+    # for cli
+    # docker exec -it ksqldb-server ksql http://localhost:8088
+    image: confluentinc/ksqldb-server
+    hostname: ksqldb-server
+    container_name: ksqldb-server
+    depends_on:
+      kraft1:
+        condition: service_healthy
+      kraft2:
+        condition: service_healthy
+      kraft3:
+        condition: service_healthy
+      schema-registry:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8088:8088"
+    environment:
+      # https://docs.ksqldb.io/en/latest/reference/server-configuration/
+      KSQL_LISTENERS: http://0.0.0.0:8088
+      KSQL_BOOTSTRAP_SERVERS: kraft1:9192,kraft2:9193,kraft3:9194
+      KSQL_KSQL_SERVICE_ID: ksqldb1_
+      KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE: 'true'
+      KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE: 'true'
+      KSQL_OPTS: -Dconfluent.support.metrics.enable=false
+      KSQL_KSQL_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      KSQL_KSQL_STREAMS_AUTO_OFFSET_RESET: earliest
+    healthcheck:
+      test: curl --fail --silent http://localhost:8088/info --output /dev/null || exit 1
+      interval: 5s
+      timeout: 20s
+      retries: 20
+      start_period: 20s
+
+  kafka-connect-01:
+    image: confluentinc/cp-kafka-connect-base
+    container_name: kafka-connect-01
+    hostname: kafka-connect-01
+    depends_on:
+      kraft1:
+        condition: service_healthy
+      kraft2:
+        condition: service_healthy
+      kraft3:
+        condition: service_healthy
+      schema-registry:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8083:8083"
+    environment:
+      CONNECT_REST_PORT: 8083
+
+      CONNECT_BOOTSTRAP_SERVERS: kraft1:9192,kraft2:9193,kraft3:9194
+      CONNECT_GROUP_ID: kafka-connect-01
+      CONNECT_REST_ADVERTISED_HOST_NAME: kafka-connect-01
+
+      CONNECT_CONFIG_STORAGE_TOPIC: _kafka-connect-01-configs
+      CONNECT_OFFSET_STORAGE_TOPIC: _kafka-connect-01-offsets
+      CONNECT_STATUS_STORAGE_TOPIC: _kafka-connect-01-status
+
+      CONNECT_KEY_CONVERTER: io.confluent.connect.avro.AvroConverter
+      CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      CONNECT_KEY_CONVERTER_ENHANCED_AVRO_SCHEMA_SUPPORT: "true"
+
+      CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
+      CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      CONNECT_VALUE_CONVERTER_ENHANCED_AVRO_SCHEMA_SUPPORT: "true"
+
+      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: "3"
+      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: "3"
+      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: "3"
+
+      CONNECT_LOG4J_APPENDER_STDOUT_LAYOUT_CONVERSIONPATTERN: "[%d] %p %X{connector.context}%m (%c:%L)%n"
+      CONNECT_PLUGIN_PATH: '/usr/share/java,/usr/share/confluent-hub-components,/plugins'
+    volumes:
+      - ./connectors/plugins:/plugins
+    command:
+      - bash
+      - -c
+      - |
+        #echo "Installing connector plugins - see https://confluent.io/hub/ for plugins"
+        #confluent-hub install --no-prompt jcustenborder/kafka-connect-spooldir:latest
+        #confluent-hub install --no-prompt debezium/debezium-connector-mysql:latest
+        #confluent-hub install --no-prompt confluentinc/kafka-connect-datagen:latest
+        #confluent-hub install --no-prompt confluentinc/kafka-connect-elasticsearch:latest
+        #
+        echo "Launching Kafka Connect worker"
+        /etc/confluent/docker/run &
+        #
+        echo "Waiting for Kafka Connect to start listening on localhost"
+        while : ; do
+          curl_status=$$(curl -s -o /dev/null -w %{http_code} http://localhost:8083/connectors)
+          echo -e $$(date) " Kafka Connect listener HTTP state: " $$curl_status " (waiting for 200)"
+          if [ $$curl_status -eq 200 ] ; then
+            echo "api working - continue"
+            break
+          fi
+          sleep 5
+        done
+        # you could configure the connectors here
+        sleep infinity
+    healthcheck:
+      test: curl --fail --silent http://localhost:8083/connectors --output /dev/null || exit 1
+      interval: 5s
+      timeout: 20s
+      retries: 20
+      start_period: 20s
 
 volumes:
   kraft1_data:

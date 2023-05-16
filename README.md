@@ -22,3 +22,33 @@ The setup also includes a health indicator by the use of netcat.
 
 For connections from your dev machine you need to add `/etc/hosts` entries for kraft1, kraft2 and kraft3 targeting
 127.0.0.1. Then you can use `kraft1:9192,kraft2:9193,kraft3:9194` as your broker connection string.
+
+## Additional Services
+
+### Kafdrop
+
+Web UI for viewing Kafka topics and browsing consumer groups. Availbale under http://localhost:9000.
+
+### Schema Registry
+
+Next to the server a schema registry is started an mapped to http://localhost:8081.
+
+### KSQLDB Server
+
+ksqlDB enables you to build event streaming applications leveraging your familiarity with relational databases.
+
+Server info: http://127.0.0.1:8088/info
+
+To get a shell run this command:
+
+```shell
+docker exec -it ksqldb-server ksql
+```
+
+It will default to server under http://127.0.0.1:8088.
+
+### Kafka Connect
+
+Kafka Connect is a tool for scalably and reliably streaming data between Apache Kafka and other data systems.
+
+REST API available via http://127.0.0.1:8083
