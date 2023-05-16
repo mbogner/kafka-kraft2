@@ -13,12 +13,11 @@ The default EXPOSE 9092 was omitted as this can be easily changed in the server.
 
 ## Usage
 
-* cd to `docker/kraft` directory and run the `download.sh` script to get a local copy of kafka. This step was added to
-  cache the file locally and speed up image build. Of course adding the download to the image build would be possible as
-  well, but I wanted to avoid re-downloads.
+* cd to `docker/kraft` directory and run the `download-kafka.sh` script to get a local copy of kafka. This step was
+  added to cache the file locally and speed up image build. Of course adding the download to the image build would be
+  possible as well, but I wanted to avoid re-downloads.
+* cd to `connectors` and run `download-connect-plugins.sh` to download some sample plugins.
 * Then simply start the docker-compose setup: `docker compose up -d`
-
-The setup also includes a health indicator by the use of netcat.
 
 For connections from your dev machine you need to add `/etc/hosts` entries for kraft1, kraft2 and kraft3 targeting
 127.0.0.1. Then you can use `kraft1:9192,kraft2:9193,kraft3:9194` as your broker connection string.
