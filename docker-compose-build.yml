@@ -1,0 +1,9 @@
+version: "3.8"
+services:
+
+  # separate file for being able to s
+  kraft:
+    build:
+      context: ./docker/kraft
+      dockerfile: Dockerfile
+    image: mbopm/kraft:latest

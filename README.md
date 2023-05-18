@@ -17,6 +17,9 @@ The default EXPOSE 9092 was omitted as this can be easily changed in the server.
   added to cache the file locally and speed up image build. Of course adding the download to the image build would be
   possible as well, but I wanted to avoid re-downloads.
 * cd to `connectors` and run `download-connect-plugins.sh` to download some sample plugins.
+* run the script `docker-compose-build.sh`. This builds the used kafka container and avoids rebuilding the same image
+  multiple times. You can of course also run `docker compose -f docker-compose-build.yml build` yourself which is what
+  the script wraps for you.
 * Then simply start the docker-compose setup: `docker compose up -d`
 
 For connections from your dev machine you need to add `/etc/hosts` entries for kraft1, kraft2 and kraft3 targeting

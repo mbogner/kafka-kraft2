@@ -2,7 +2,7 @@ version: "3.8"
 services:
 
   kraft1:
-    build: docker/kraft
+    image: mbopm/kraft:latest
     container_name: kraft1
     hostname: kraft1
     environment:
@@ -21,7 +21,7 @@ services:
       - "127.0.0.1:9192:9192"
 
   kraft2:
-    build: docker/kraft
+    image: mbopm/kraft:latest
     container_name: kraft2
     hostname: kraft2
     environment:
@@ -40,7 +40,7 @@ services:
       - "127.0.0.1:9193:9193"
 
   kraft3:
-    build: docker/kraft
+    image: mbopm/kraft:latest
     container_name: kraft3
     hostname: kraft3
     environment:
@@ -102,12 +102,26 @@ services:
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://kraft1:9192,PLAINTEXT://kraft2:9193,PLAINTEXT://kraft3:9194
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
       SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+      SCHEMA_REGISTRY_ACCESS_CONTROL_ALLOW_METHODS: GET,POST,PUT,OPTIONS
+      SCHEMA_REGISTRY_ACCESS_CONTROL_ALLOW_ORIGIN: "*"
     healthcheck:
       test: curl --fail --silent http://localhost:8081/config --output /dev/null || exit 1
       interval: 5s
       timeout: 5s
       retries: 10
       start_period: 5s
+
+  schema-registry-ui:
+    image: landoop/schema-registry-ui
+    hostname: schema-registry-ui
+    container_name: schema-registry-ui
+    ports:
+      - "127.0.0.1:8082:8000"
+    depends_on:
+      schema-registry:
+        condition: service_healthy
+    environment:
+      SCHEMAREGISTRY_URL: http://127.0.0.1:8081
 
   ksqldb-server:
     # for cli
