@@ -35,19 +35,9 @@ Web UI for viewing Kafka topics and browsing consumer groups. Availbale under ht
 
 Next to the server a schema registry is started an mapped to http://localhost:8081.
 
-### KSQLDB Server
+### Schema Registry UI
 
-ksqlDB enables you to build event streaming applications leveraging your familiarity with relational databases.
-
-Server info: http://127.0.0.1:8088/info
-
-To get a shell run this command:
-
-```shell
-docker exec -it ksqldb-server ksql
-```
-
-It will default to server under http://127.0.0.1:8088.
+For schema administration a web ui is available under http://localhost:8082.
 
 ### Kafka Connect
 
