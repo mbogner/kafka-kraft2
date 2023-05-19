@@ -1,6 +1,7 @@
 .gradle/
 .idea/
 /connectors/plugins
+/data
 
 *.iws
 *.iml
