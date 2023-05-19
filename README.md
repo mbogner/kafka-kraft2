@@ -28,3 +28,9 @@ For connections from your dev machine you need to add `/etc/hosts` entries for k
 ## Additional Services
 
 See [services.md](services.md) for a service table.
+
+## Production Use
+
+This project is for local development only. Don't run multiple nodes on the same host.
+
+Regarding scaling read https://www.confluent.io/blog/how-choose-number-topics-partitions-kafka-cluster/.
