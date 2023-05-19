@@ -27,20 +27,4 @@ For connections from your dev machine you need to add `/etc/hosts` entries for k
 
 ## Additional Services
 
-### Kafdrop
-
-Web UI for viewing Kafka topics and browsing consumer groups. Availbale under http://localhost:9000.
-
-### Schema Registry
-
-Next to the server a schema registry is started an mapped to http://localhost:8081.
-
-### Schema Registry UI
-
-For schema administration a web ui is available under http://localhost:8082.
-
-### Kafka Connect
-
-Kafka Connect is a tool for scalably and reliably streaming data between Apache Kafka and other data systems.
-
-REST API available via http://127.0.0.1:8083
+See [services.md](services.md) for a service table.

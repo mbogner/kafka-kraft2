@@ -63,7 +63,7 @@ services:
     container_name: kafdrop
     hostname: kafdrop
     ports:
-      - "127.0.0.1:9000:9000"
+      - "127.0.0.1:8084:9000"
     volumes:
       - /etc/localtime:/etc/localtime:ro
     depends_on:
