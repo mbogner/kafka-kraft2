@@ -13,8 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-rootProject.name = "kafka-kraft"
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-include("spring-boot")
-project(":spring-boot").projectDir = file("samples/spring-boot")
+package dev.mbo.kraft.sample.kafka;
+
+/**
+ * Simple list of constants to have topics in a single place. Could be replaced by application.yml entries.
+ */
+public final class KafkaTopics {
+
+    public static final String SAMPLE_MESSAGES = "sample.messages";
+
+    private KafkaTopics() {
+        throw new IllegalAccessError();
+    }
+}

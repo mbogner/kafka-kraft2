@@ -1,0 +1,23 @@
+logging:
+  level:
+    root: INFO
+    dev.mbo: TRACE
+  pattern:
+    # pattern for including MDC
+    console: ${CONSOLE_LOG_PATTERN:%clr(%d{${LOG_DATEFORMAT_PATTERN:yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:%5p}) %clr([%15.15t]){faint} %clr(%F:%L){cyan} %clr(:){faint} %m %clr({){faint}%X%clr(}){faint}%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}}
+
+
+spring:
+  kafka:
+    bootstrap-servers: kraft1:9192,kraft2:9193,kraft3:9194
+    listener:
+      type: batch
+      ack-mode: manual
+    consumer:
+      group-id: backend-c1
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      max-poll-records: 5
+    producer:
+      client-id: backend-p1
+      batch-size: 5

@@ -2,6 +2,7 @@
 .idea/
 /connectors/plugins
 /data
+build/
 
 *.iws
 *.iml

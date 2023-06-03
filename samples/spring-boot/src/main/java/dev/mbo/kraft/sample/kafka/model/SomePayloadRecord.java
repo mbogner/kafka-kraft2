@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-rootProject.name = "kafka-kraft"
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-include("spring-boot")
-project(":spring-boot").projectDir = file("samples/spring-boot")
+package dev.mbo.kraft.sample.kafka.model;
+
+public record SomePayloadRecord(String key, SomePayload payload) {
+}

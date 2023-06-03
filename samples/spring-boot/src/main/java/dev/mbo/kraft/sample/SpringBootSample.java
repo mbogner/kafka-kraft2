@@ -13,8 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-rootProject.name = "kafka-kraft"
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-include("spring-boot")
-project(":spring-boot").projectDir = file("samples/spring-boot")
+package dev.mbo.kraft.sample;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
+
+@EnableScheduling
+@EnableAsync
+@SpringBootApplication
+public class SpringBootSample {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SpringBootSample.class, args);
+    }
+}
