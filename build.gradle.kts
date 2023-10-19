@@ -16,6 +16,6 @@
 
 tasks.withType<Wrapper> {
     // https://gradle.org/releases/
-    gradleVersion = "8.0.2"
+    gradleVersion = "8.4"
     distributionType = Wrapper.DistributionType.BIN
 }

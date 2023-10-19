@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-ADD kafka_2.13-3.4.0.tgz /opt/
+ADD kafka.tgz /opt/
 RUN ln -s /opt/kafka_* /opt/kafka && \
     apt update && \
     apt install -y openjdk-17-jdk-headless netcat && \
