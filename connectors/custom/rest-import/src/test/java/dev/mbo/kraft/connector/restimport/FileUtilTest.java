@@ -13,15 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-rootProject.name = "kafka-kraft"
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-val projectModules = mapOf(
-    "sample-spring-boot" to "samples/spring-boot",
-    "connector-rest-import" to "connectors/custom/rest-import",
-)
+package dev.mbo.kraft.connector.restimport;
 
-projectModules.forEach {
-    include(it.key)
-    project(":${it.key}").projectDir = file(it.value)
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class FileUtilTest {
+
+    @Test
+    public void testResourceToString() throws IOException {
+        assertThat(FileUtil.resourceToString("sample-response-formatted.json")).isNotBlank();
+    }
+
 }

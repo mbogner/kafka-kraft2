@@ -13,15 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-rootProject.name = "kafka-kraft"
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-val projectModules = mapOf(
-    "sample-spring-boot" to "samples/spring-boot",
-    "connector-rest-import" to "connectors/custom/rest-import",
-)
+package dev.mbo.kraft.connector.restimport;
 
-projectModules.forEach {
-    include(it.key)
-    project(":${it.key}").projectDir = file(it.value)
+import org.apache.commons.io.IOUtils;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Objects;
+
+public final class FileUtil {
+
+    public static String resourceToString(String filePath) throws IOException {
+        assert null != filePath;
+        try (final var inputStream = Objects.requireNonNull(FileUtil.class.getClassLoader().getResourceAsStream(filePath))) {
+            return IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+        }
+    }
+
 }

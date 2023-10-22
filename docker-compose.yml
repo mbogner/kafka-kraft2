@@ -130,8 +130,8 @@ services:
       start_period: 2s
 
   kafka-connect-01:
-    image: confluentinc/cp-kafka-connect-base
-    container_name: kafka-connect-01
+    build: ./docker/connect
+    image: mbopm/kafka-connect:latest
     hostname: kafka-connect-01
     depends_on:
       kraft1:
@@ -142,67 +142,17 @@ services:
         condition: service_healthy
       schema-registry:
         condition: service_healthy
+    volumes:
+      - ./docker/connect/config/connect.properties:/opt/kafka/config/connect.properties:rw
+      - ./connectors/plugins:/plugins:ro
     ports:
       - "127.0.0.1:8083:8083"
-    environment:
-      CONNECT_REST_PORT: 8083
-
-      CONNECT_BOOTSTRAP_SERVERS: kraft1:9192,kraft2:9193,kraft3:9194
-      CONNECT_GROUP_ID: kafka-connect-01
-      CONNECT_REST_ADVERTISED_HOST_NAME: kafka-connect-01
-
-      CONNECT_CONFIG_STORAGE_TOPIC: _kafka-connect-01-configs
-      CONNECT_OFFSET_STORAGE_TOPIC: _kafka-connect-01-offsets
-      CONNECT_STATUS_STORAGE_TOPIC: _kafka-connect-01-status
-
-      CONNECT_KEY_CONVERTER: io.confluent.connect.avro.AvroConverter
-      CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
-      CONNECT_KEY_CONVERTER_ENHANCED_AVRO_SCHEMA_SUPPORT: "true"
-
-      CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
-      CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
-      CONNECT_VALUE_CONVERTER_ENHANCED_AVRO_SCHEMA_SUPPORT: "true"
-
-      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: "3"
-      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: "3"
-      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: "3"
-
-      CONNECT_LOG4J_APPENDER_STDOUT_LAYOUT_CONVERSIONPATTERN: "[%d] %p %X{connector.context}%m (%c:%L)%n"
-      CONNECT_PLUGIN_PATH: '/usr/share/java,/usr/share/confluent-hub-components,/plugins'
-    volumes:
-      - ./connectors/plugins:/plugins
-      - ./data/kafka-connect-01:/data:rw
-    command:
-      - bash
-      - -c
-      - |
-        #echo "Installing connector plugins - see https://confluent.io/hub/ for plugins"
-        #confluent-hub install --no-prompt jcustenborder/kafka-connect-spooldir:latest
-        #confluent-hub install --no-prompt debezium/debezium-connector-mysql:latest
-        #confluent-hub install --no-prompt confluentinc/kafka-connect-datagen:latest
-        #confluent-hub install --no-prompt confluentinc/kafka-connect-elasticsearch:latest
-        #
-        echo "Launching Kafka Connect worker"
-        /etc/confluent/docker/run &
-        #
-        echo "Waiting for Kafka Connect to start listening on localhost"
-        while : ; do
-          curl_status=$$(curl -s -o /dev/null -w %{http_code} http://localhost:8083/connectors)
-          echo -e $$(date) " Kafka Connect listener HTTP state: " $$curl_status " (waiting for 200)"
-          if [ $$curl_status -eq 200 ] ; then
-            echo "api working - continue"
-            break
-          fi
-          sleep 5
-        done
-        # you could configure the connectors here
-        sleep infinity
     healthcheck:
       test: nc -z localhost 8083 || exit 1
-      interval: 5s
-      timeout: 20s
-      retries: 20
-      start_period: 20s
+      interval: 2s
+      timeout: 2s
+      retries: 10
+      start_period: 2s
 
 volumes:
   kraft1_data:

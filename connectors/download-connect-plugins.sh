@@ -23,9 +23,9 @@ FILES=()
 # https://github.com/jcustenborder/kafka-connect-spooldir
 FILES[1]="jcustenborder-kafka-connect-spooldir-2.0.65.zip;${BASEDIR}/jcustenborder/kafka-connect-spooldir/versions/2.0.65/jcustenborder-kafka-connect-spooldir-2.0.65.zip"
 # https://github.com/confluentinc/kafka-connect-datagen
-FILES[2]="confluentinc-kafka-connect-datagen-0.6.0.zip;${BASEDIR}/confluentinc/kafka-connect-datagen/versions/0.6.0/confluentinc-kafka-connect-datagen-0.6.0.zip"
+FILES[2]="confluentinc-kafka-connect-datagen-0.6.3.zip;${BASEDIR}/confluentinc/kafka-connect-datagen/versions/0.6.3/confluentinc-kafka-connect-datagen-0.6.3.zip"
 # https://github.com/confluentinc/kafka-connect-jdbc
-FILES[3]="confluentinc-kafka-connect-jdbc-10.7.1.zip;${BASEDIR}/confluentinc/kafka-connect-jdbc/versions/10.7.1/confluentinc-kafka-connect-jdbc-10.7.1.zip"
+FILES[3]="confluentinc-kafka-connect-jdbc-10.7.4.zip;${BASEDIR}/confluentinc/kafka-connect-jdbc/versions/10.7.4/confluentinc-kafka-connect-jdbc-10.7.4.zip"
 
 function die() {
   echo "$1"
@@ -47,3 +47,7 @@ for file in ${FILES[*]}; do
   fi
   unzip -d plugins "${filename}" >>/dev/null
 done
+
+# fix missing guava in kafka-connect-spooldir
+wget https://repo1.maven.org/maven2/com/google/guava/guava/32.1.3-jre/guava-32.1.3-jre.jar \
+  -O plugins/jcustenborder-kafka-connect-spooldir-2.0.65/lib/guava-32.1.3-jre.jar

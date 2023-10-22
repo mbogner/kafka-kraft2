@@ -1,0 +1,943 @@
+[
+  {
+    "id": 7812,
+    "name": "Vivod GmbH",
+    "location": {
+      "address": "Laaberstrasse 1",
+      "postalCode": "2384",
+      "city": "Breitenfurt",
+      "latitude": 48.1381917,
+      "longitude": 16.2038779
+    },
+    "contact": {
+      "telephone": "4322392391",
+      "mail": "office@kfz-vivod.at"
+    },
+    "openingHours": [
+      {
+        "day": "MO",
+        "label": "Montag",
+        "order": 1,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "DI",
+        "label": "Dienstag",
+        "order": 2,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "MI",
+        "label": "Mittwoch",
+        "order": 3,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "DO",
+        "label": "Donnerstag",
+        "order": 4,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "FR",
+        "label": "Freitag",
+        "order": 5,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "SA",
+        "label": "Samstag",
+        "order": 6,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "SO",
+        "label": "Sonntag",
+        "order": 7,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "FE",
+        "label": "Feiertag",
+        "order": 8,
+        "from": "00:00",
+        "to": "24:00"
+      }
+    ],
+    "offerInformation": {
+      "service": false,
+      "selfService": true,
+      "unattended": true
+    },
+    "paymentMethods": {
+      "cash": true,
+      "debitCard": true,
+      "creditCard": true
+    },
+    "paymentArrangements": {
+      "cooperative": false,
+      "clubCard": false
+    },
+    "otherServiceOffers": "\nReifenservice\nÜberprüfung §57a\nService lt. Herstellerangabe inkl. Mobilitäts Garantie (International)\nKlima Service und Reparatur\nWindschutzscheiben Einbau und Reparatur\nAnhängekupplung Einbau und Anlernen\nFehlercode Auslesen und Reparatur\nFahrwerk einstellen\nect.\n",
+    "position": 1,
+    "open": true,
+    "distance": 5.596034454744131,
+    "prices": [
+      {
+        "fuelType": "DIE",
+        "amount": 1.702,
+        "label": "Diesel"
+      }
+    ]
+  },
+  {
+    "id": 1469826,
+    "name": "AVIA XPress (SB-Carwash, SB-Sauger, Wasser gratis) ",
+    "location": {
+      "address": "Hauptstraße 74",
+      "postalCode": "2384",
+      "city": "Breitenfurt",
+      "latitude": 48.1356658,
+      "longitude": 16.194080999999983
+    },
+    "contact": {
+      "telephone": "0664/1352069",
+      "mail": "office.tankstelle@gmail.com"
+    },
+    "openingHours": [
+      {
+        "day": "MO",
+        "label": "Montag",
+        "order": 1,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "DI",
+        "label": "Dienstag",
+        "order": 2,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "MI",
+        "label": "Mittwoch",
+        "order": 3,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "DO",
+        "label": "Donnerstag",
+        "order": 4,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "FR",
+        "label": "Freitag",
+        "order": 5,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "SA",
+        "label": "Samstag",
+        "order": 6,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "SO",
+        "label": "Sonntag",
+        "order": 7,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "FE",
+        "label": "Feiertag",
+        "order": 8,
+        "from": "00:00",
+        "to": "24:00"
+      }
+    ],
+    "offerInformation": {
+      "service": false,
+      "selfService": true,
+      "unattended": true
+    },
+    "paymentMethods": {
+      "cash": false,
+      "debitCard": true,
+      "creditCard": true,
+      "others": "AVIAmat, UTA, DKV"
+    },
+    "paymentArrangements": {
+      "cooperative": false,
+      "clubCard": false
+    },
+    "otherServiceOffers": "Waschbox, Trafik",
+    "position": 2,
+    "open": true,
+    "distance": 5.276929288460238,
+    "prices": [
+      {
+        "fuelType": "DIE",
+        "amount": 1.704,
+        "label": "Diesel"
+      }
+    ]
+  },
+  {
+    "id": 1354774,
+    "name": "avanti - Purkersdorf Tullnerbachstraße 77-79",
+    "location": {
+      "address": "Tullnerbachstrasse 77-79",
+      "postalCode": "3002",
+      "city": "Purkersdorf",
+      "latitude": 48.19421,
+      "longitude": 16.14117
+    },
+    "contact": {
+      "telephone": "800202055",
+      "website": "www.omv.com"
+    },
+    "openingHours": [
+      {
+        "day": "MO",
+        "label": "Montag",
+        "order": 1,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "DI",
+        "label": "Dienstag",
+        "order": 2,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "MI",
+        "label": "Mittwoch",
+        "order": 3,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "DO",
+        "label": "Donnerstag",
+        "order": 4,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "FR",
+        "label": "Freitag",
+        "order": 5,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "SA",
+        "label": "Samstag",
+        "order": 6,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "SO",
+        "label": "Sonntag",
+        "order": 7,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "FE",
+        "label": "Feiertag",
+        "order": 8,
+        "from": "00:00",
+        "to": "24:00"
+      }
+    ],
+    "offerInformation": {
+      "service": false,
+      "selfService": true,
+      "unattended": true
+    },
+    "paymentMethods": {
+      "cash": false,
+      "debitCard": true,
+      "creditCard": true,
+      "others": "OMV STATIONSKARTE, DKV, MASTERCARD, MAESTRO, ROUTEX, DINERS, VISA"
+    },
+    "paymentArrangements": {
+      "cooperative": false,
+      "clubCard": false
+    },
+    "position": 3,
+    "open": true,
+    "distance": 2.59866053636382,
+    "prices": [
+      {
+        "fuelType": "DIE",
+        "amount": 1.713,
+        "label": "Diesel"
+      }
+    ]
+  },
+  {
+    "id": 1471147,
+    "name": "Turmöl Quick",
+    "location": {
+      "address": "Wiener Straße 30",
+      "postalCode": "3002",
+      "city": "Purkersdorf",
+      "latitude": 48.20595,
+      "longitude": 16.1824
+    },
+    "contact": {
+      "mail": "marketing-box@doppler.at"
+    },
+    "openingHours": [
+      {
+        "day": "MO",
+        "label": "Montag",
+        "order": 1,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "DI",
+        "label": "Dienstag",
+        "order": 2,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "MI",
+        "label": "Mittwoch",
+        "order": 3,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "DO",
+        "label": "Donnerstag",
+        "order": 4,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "FR",
+        "label": "Freitag",
+        "order": 5,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "SA",
+        "label": "Samstag",
+        "order": 6,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "SO",
+        "label": "Sonntag",
+        "order": 7,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "FE",
+        "label": "Feiertag",
+        "order": 8,
+        "from": "00:00",
+        "to": "24:00"
+      }
+    ],
+    "offerInformation": {
+      "service": false,
+      "selfService": false,
+      "unattended": true
+    },
+    "paymentMethods": {
+      "cash": true,
+      "debitCard": true,
+      "creditCard": true
+    },
+    "paymentArrangements": {
+      "cooperative": false,
+      "clubCard": false
+    },
+    "position": 4,
+    "open": true,
+    "distance": 4.6754263167464405,
+    "prices": [
+      {
+        "fuelType": "DIE",
+        "amount": 1.713,
+        "label": "Diesel"
+      }
+    ]
+  },
+  {
+    "id": 1354776,
+    "name": "avanti - Gablitz Linzer Straße 1a",
+    "location": {
+      "address": "Linzer Strasse 1a",
+      "postalCode": "3003",
+      "city": "Gablitz",
+      "latitude": 48.21888,
+      "longitude": 16.16551
+    },
+    "contact": {
+      "telephone": "800202055",
+      "website": "www.omv.com"
+    },
+    "openingHours": [
+      {
+        "day": "MO",
+        "label": "Montag",
+        "order": 1,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "DI",
+        "label": "Dienstag",
+        "order": 2,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "MI",
+        "label": "Mittwoch",
+        "order": 3,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "DO",
+        "label": "Donnerstag",
+        "order": 4,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "FR",
+        "label": "Freitag",
+        "order": 5,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "SA",
+        "label": "Samstag",
+        "order": 6,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "SO",
+        "label": "Sonntag",
+        "order": 7,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "FE",
+        "label": "Feiertag",
+        "order": 8,
+        "from": "00:00",
+        "to": "24:00"
+      }
+    ],
+    "offerInformation": {
+      "service": false,
+      "selfService": true,
+      "unattended": true
+    },
+    "paymentMethods": {
+      "cash": false,
+      "debitCard": true,
+      "creditCard": true,
+      "others": "OMV STATIONSKARTE, DKV, MASTERCARD, MAESTRO, ROUTEX, DINERS, VISA"
+    },
+    "paymentArrangements": {
+      "cooperative": false,
+      "clubCard": false
+    },
+    "position": 5,
+    "open": true,
+    "distance": 5.4822193041405205,
+    "prices": [
+      {
+        "fuelType": "DIE",
+        "amount": 1.713,
+        "label": "Diesel"
+      }
+    ]
+  },
+  {
+    "id": 1354888,
+    "name": "JET TANKSTELLE",
+    "location": {
+      "address": "LINZERSTRASSE 25",
+      "postalCode": "3002",
+      "city": "PURKERSDORF",
+      "latitude": 48.211521,
+      "longitude": 16.172969
+    },
+    "contact": {
+      "telephone": "0223163584"
+    },
+    "openingHours": [
+      {
+        "day": "MO",
+        "label": "Montag",
+        "order": 1,
+        "from": "05:00",
+        "to": "22:00"
+      },
+      {
+        "day": "DI",
+        "label": "Dienstag",
+        "order": 2,
+        "from": "05:00",
+        "to": "22:00"
+      },
+      {
+        "day": "MI",
+        "label": "Mittwoch",
+        "order": 3,
+        "from": "05:00",
+        "to": "22:00"
+      },
+      {
+        "day": "DO",
+        "label": "Donnerstag",
+        "order": 4,
+        "from": "05:00",
+        "to": "22:00"
+      },
+      {
+        "day": "FR",
+        "label": "Freitag",
+        "order": 5,
+        "from": "05:00",
+        "to": "22:00"
+      },
+      {
+        "day": "SA",
+        "label": "Samstag",
+        "order": 6,
+        "from": "05:00",
+        "to": "22:00"
+      },
+      {
+        "day": "SO",
+        "label": "Sonntag",
+        "order": 7,
+        "from": "06:00",
+        "to": "22:00"
+      },
+      {
+        "day": "FE",
+        "label": "Feiertag",
+        "order": 8,
+        "from": "06:00",
+        "to": "22:00"
+      }
+    ],
+    "offerInformation": {
+      "service": false,
+      "selfService": true,
+      "unattended": false
+    },
+    "paymentMethods": {
+      "cash": true,
+      "debitCard": true,
+      "creditCard": true
+    },
+    "paymentArrangements": {
+      "cooperative": false,
+      "clubCard": false
+    },
+    "otherServiceOffers": "Autowäsche, Billa shop & shop, Backshop, Vignetten-Verkauf",
+    "position": 6,
+    "open": false,
+    "distance": 4.884271007448667,
+    "prices": []
+  },
+  {
+    "id": 247869,
+    "name": "eni24",
+    "location": {
+      "address": "Wiener Strasse 48",
+      "postalCode": "3002",
+      "city": "Purkersdorf",
+      "latitude": 48.205435,
+      "longitude": 16.192861
+    },
+    "contact": {
+      "fax": "053376231470"
+    },
+    "openingHours": [
+      {
+        "day": "MO",
+        "label": "Montag",
+        "order": 1,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "DI",
+        "label": "Dienstag",
+        "order": 2,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "MI",
+        "label": "Mittwoch",
+        "order": 3,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "DO",
+        "label": "Donnerstag",
+        "order": 4,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "FR",
+        "label": "Freitag",
+        "order": 5,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "SA",
+        "label": "Samstag",
+        "order": 6,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "SO",
+        "label": "Sonntag",
+        "order": 7,
+        "from": "00:00",
+        "to": "24:00"
+      },
+      {
+        "day": "FE",
+        "label": "Feiertag",
+        "order": 8,
+        "from": "00:00",
+        "to": "24:00"
+      }
+    ],
+    "offerInformation": {
+      "service": false,
+      "selfService": true,
+      "unattended": true
+    },
+    "paymentMethods": {
+      "cash": true,
+      "debitCard": true,
+      "creditCard": true,
+      "others": "Maestro,DKV,LOGP,MasterCard,Routex,euroShell Card,UTA,VISA"
+    },
+    "paymentArrangements": {
+      "cooperative": false,
+      "clubCard": false
+    },
+    "position": 7,
+    "open": true,
+    "distance": 5.108688805283093,
+    "prices": []
+  },
+  {
+    "id": 1354945,
+    "name": "JET TANKSTELLE",
+    "location": {
+      "address": "HAUPTSTRASSE 88",
+      "postalCode": "3021",
+      "city": "PRESSBAUM",
+      "latitude": 48.177604,
+      "longitude": 16.06147
+    },
+    "contact": {
+      "telephone": "0223352111"
+    },
+    "openingHours": [
+      {
+        "day": "MO",
+        "label": "Montag",
+        "order": 1,
+        "from": "05:00",
+        "to": "23:30"
+      },
+      {
+        "day": "DI",
+        "label": "Dienstag",
+        "order": 2,
+        "from": "05:00",
+        "to": "23:30"
+      },
+      {
+        "day": "MI",
+        "label": "Mittwoch",
+        "order": 3,
+        "from": "05:00",
+        "to": "23:30"
+      },
+      {
+        "day": "DO",
+        "label": "Donnerstag",
+        "order": 4,
+        "from": "05:00",
+        "to": "23:30"
+      },
+      {
+        "day": "FR",
+        "label": "Freitag",
+        "order": 5,
+        "from": "05:00",
+        "to": "23:30"
+      },
+      {
+        "day": "SA",
+        "label": "Samstag",
+        "order": 6,
+        "from": "05:00",
+        "to": "23:30"
+      },
+      {
+        "day": "SO",
+        "label": "Sonntag",
+        "order": 7,
+        "from": "06:00",
+        "to": "23:30"
+      },
+      {
+        "day": "FE",
+        "label": "Feiertag",
+        "order": 8,
+        "from": "06:00",
+        "to": "23:30"
+      }
+    ],
+    "offerInformation": {
+      "service": false,
+      "selfService": true,
+      "unattended": false
+    },
+    "paymentMethods": {
+      "cash": true,
+      "debitCard": true,
+      "creditCard": true
+    },
+    "paymentArrangements": {
+      "cooperative": false,
+      "clubCard": false
+    },
+    "otherServiceOffers": "Billa shop & shop, Backshop, Vignetten-Verkauf",
+    "position": 8,
+    "open": true,
+    "distance": 6.391171223008888,
+    "prices": []
+  },
+  {
+    "id": 1474263,
+    "name": "eni",
+    "location": {
+      "address": "An der Stadlhütte 1e",
+      "postalCode": "3002",
+      "city": "Purkersdorf",
+      "latitude": 48.186749,
+      "longitude": 16.124246
+    },
+    "contact": {
+      "telephone": "0223164668",
+      "fax": "02231646684"
+    },
+    "openingHours": [
+      {
+        "day": "MO",
+        "label": "Montag",
+        "order": 1,
+        "from": "06:00",
+        "to": "22:00"
+      },
+      {
+        "day": "DI",
+        "label": "Dienstag",
+        "order": 2,
+        "from": "06:00",
+        "to": "22:00"
+      },
+      {
+        "day": "MI",
+        "label": "Mittwoch",
+        "order": 3,
+        "from": "06:00",
+        "to": "22:00"
+      },
+      {
+        "day": "DO",
+        "label": "Donnerstag",
+        "order": 4,
+        "from": "06:00",
+        "to": "22:00"
+      },
+      {
+        "day": "FR",
+        "label": "Freitag",
+        "order": 5,
+        "from": "06:00",
+        "to": "22:00"
+      },
+      {
+        "day": "SA",
+        "label": "Samstag",
+        "order": 6,
+        "from": "06:00",
+        "to": "21:00"
+      },
+      {
+        "day": "SO",
+        "label": "Sonntag",
+        "order": 7,
+        "from": "07:00",
+        "to": "21:00"
+      },
+      {
+        "day": "FE",
+        "label": "Feiertag",
+        "order": 8,
+        "from": "07:00",
+        "to": "21:00"
+      }
+    ],
+    "offerInformation": {
+      "service": false,
+      "selfService": true,
+      "unattended": false
+    },
+    "paymentMethods": {
+      "cash": true,
+      "debitCard": true,
+      "creditCard": true,
+      "others": "AMEX,Maestro,Diners Club,DKV,GUTS,GUTS,LOGP,MasterCard,Routex,euroShell Card,UTA,VISA"
+    },
+    "paymentArrangements": {
+      "cooperative": false,
+      "clubCard": false
+    },
+    "position": 9,
+    "open": false,
+    "distance": 2.4202431039822505,
+    "prices": []
+  },
+  {
+    "id": 35623,
+    "name": "BP",
+    "location": {
+      "address": "Hauptstrasse 54 ",
+      "postalCode": "3021",
+      "city": "Pressbaum",
+      "latitude": 48.180025,
+      "longitude": 16.0778655
+    },
+    "contact": {
+      "telephone": "43223352543",
+      "fax": "4322335254317",
+      "mail": "R52033@bprosi.at"
+    },
+    "openingHours": [
+      {
+        "day": "MO",
+        "label": "Montag",
+        "order": 1,
+        "from": "06:00",
+        "to": "20:00"
+      },
+      {
+        "day": "DI",
+        "label": "Dienstag",
+        "order": 2,
+        "from": "06:00",
+        "to": "20:00"
+      },
+      {
+        "day": "MI",
+        "label": "Mittwoch",
+        "order": 3,
+        "from": "06:00",
+        "to": "20:00"
+      },
+      {
+        "day": "DO",
+        "label": "Donnerstag",
+        "order": 4,
+        "from": "06:00",
+        "to": "20:00"
+      },
+      {
+        "day": "FR",
+        "label": "Freitag",
+        "order": 5,
+        "from": "06:00",
+        "to": "20:00"
+      },
+      {
+        "day": "SA",
+        "label": "Samstag",
+        "order": 6,
+        "from": "06:00",
+        "to": "20:00"
+      },
+      {
+        "day": "SO",
+        "label": "Sonntag",
+        "order": 7,
+        "from": "06:00",
+        "to": "20:00"
+      }
+    ],
+    "offerInformation": {
+      "service": false,
+      "selfService": true,
+      "unattended": false
+    },
+    "paymentMethods": {
+      "cash": true,
+      "debitCard": true,
+      "creditCard": true,
+      "others": "Routex"
+    },
+    "paymentArrangements": {
+      "cooperative": false,
+      "clubCard": false
+    },
+    "otherServiceOffers": "Shop, Waschanlage (Portal), Bistro",
+    "position": 10,
+    "open": false,
+    "distance": 5.227250710756359,
+    "prices": []
+  }
+]

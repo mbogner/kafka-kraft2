@@ -14,6 +14,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-wget https://downloads.apache.org/kafka/3.6.0/kafka_2.13-3.6.0.tgz
-mv kafka_2.13-3.6.0.tgz kafka.tgz
-cp kafka.tgz ../connect
+bin/connect-standalone.sh "$KAFKA_CONNECT_CONFIG"

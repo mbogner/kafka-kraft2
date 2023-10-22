@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # Copyright (c) 2023.
 #
@@ -14,6 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-wget https://downloads.apache.org/kafka/3.6.0/kafka_2.13-3.6.0.tgz
-mv kafka_2.13-3.6.0.tgz kafka.tgz
-cp kafka.tgz ../connect
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+GRADLE=../../../gradlew
+NAME1="connector-rest-import"
+
+cd "${DIR}" || exit 1
+rm -rf ${NAME1}-*.zip plugins/${NAME1}-*
+
+cd "${DIR}/custom/rest-import" || exit 2
+$GRADLE clean connector
+cp build/connector/${NAME1}-*.zip "$DIR"
+
+cd "${DIR}" || exit 1
+unzip -d plugins ${NAME1}-*.zip >>/dev/null
