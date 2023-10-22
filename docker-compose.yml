@@ -15,8 +15,8 @@ services:
       test: nc -z kraft1 9192 || exit 1
       interval: 2s
       timeout: 2s
-      retries: 5
-      start_period: 5s
+      retries: 10
+      start_period: 10s
     ports:
       - "127.0.0.1:9192:9192"
 
@@ -34,8 +34,8 @@ services:
       test: nc -z kraft2 9193 || exit 1
       interval: 2s
       timeout: 2s
-      retries: 5
-      start_period: 5s
+      retries: 10
+      start_period: 10s
     ports:
       - "127.0.0.1:9193:9193"
 
@@ -53,8 +53,8 @@ services:
       test: nc -z kraft3 9194 || exit 1
       interval: 2s
       timeout: 2s
-      retries: 5
-      start_period: 5s
+      retries: 10
+      start_period: 10s
     ports:
       - "127.0.0.1:9194:9194"
 
@@ -145,6 +145,7 @@ services:
     volumes:
       - ./docker/connect/config/connect.properties:/opt/kafka/config/connect.properties:ro
       - ./connectors/plugins:/plugins:ro
+      - ./data/kafka-connect-01:/data:rw
     ports:
       - "127.0.0.1:8083:8083"
     healthcheck:

@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-export CONNECT_SERVER=http://localhost:18083
+export CONNECT_SERVER=http://localhost:8083
 export CONNECTOR_URL="${CONNECT_SERVER}/connectors"
 export TS_FORMAT='+%Y-%m-%dT%H:%M:%SZ'
 
@@ -45,5 +45,5 @@ function import_connect() {
 
   echo "importing $filename from json $fullpath to $target_url"
 
-  curl -s -X PUT -H "Content-Type:application/json" -d @"$fullpath" "$target_url"
+  curl -i -s -X PUT -H "Content-Type:application/json" -d @"$fullpath" "$target_url"
 }
