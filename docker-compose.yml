@@ -143,7 +143,7 @@ services:
       schema-registry:
         condition: service_healthy
     volumes:
-      - ./docker/connect/config/connect.properties:/opt/kafka/config/connect.properties:rw
+      - ./docker/connect/config/connect.properties:/opt/kafka/config/connect.properties:ro
       - ./connectors/plugins:/plugins:ro
     ports:
       - "127.0.0.1:8083:8083"
