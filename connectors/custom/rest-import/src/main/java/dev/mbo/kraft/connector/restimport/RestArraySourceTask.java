@@ -19,13 +19,18 @@ package dev.mbo.kraft.connector.restimport;
 import dev.mbo.kraft.connector.restimport.download.Downloader;
 import dev.mbo.kraft.connector.restimport.download.DownloaderImpl;
 import dev.mbo.kraft.connector.restimport.json.JsonParser;
+import dev.mbo.kraft.connector.restimport.kafka.ConnectAdminClient;
+import org.apache.kafka.connect.data.Schema;
+import org.apache.kafka.connect.data.SchemaBuilder;
 import org.apache.kafka.connect.source.SourceRecord;
 import org.apache.kafka.connect.source.SourceTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.HttpURLConnection;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +42,11 @@ public class RestArraySourceTask extends SourceTask {
     private RestArraySource restArraySource;
     private Timer timer;
     private Downloader downloader;
+    private static boolean initTopic = true;
+
+    private final Schema keySchema = SchemaBuilder.string().optional().build();
+    private final Schema valueSchema = SchemaBuilder.string().optional().build();
+
 
     @Override
     public String version() {
@@ -48,6 +58,18 @@ public class RestArraySourceTask extends SourceTask {
         restArraySource = RestArrayConfig.parseProps(props);
         timer = new Timer(restArraySource.pollDelayTimer(), restArraySource.pollDelay());
         downloader = new DownloaderImpl(restArraySource.downloaderBufferSize());
+
+        if (initTopic) {
+            initTopic = false;
+            LOG.info("initialise topic {} if missing", restArraySource.topic());
+            ConnectAdminClient.createTopicIfMissing(
+                    restArraySource.bootstrapServers(),
+                    restArraySource.topic(),
+                    restArraySource.numPartitions(),
+                    restArraySource.replicationFactor()
+            );
+        }
+
         LOG.info("starting connector task with config {}", restArraySource);
     }
 
@@ -56,19 +78,24 @@ public class RestArraySourceTask extends SourceTask {
         timer.await();
         LOG.info("getting data for {}", restArraySource);
         final var jsonStr = downloader.download(restArraySource.url(), HttpURLConnection.HTTP_OK);
-        final var data = JsonParser.parse(jsonStr, restArraySource.path(), restArraySource.format());
-        final List<SourceRecord> result = new ArrayList<>(data.length);
-        for (final var entry : data) {
-            LOG.debug("creating record: {}", entry);
+        final var data = JsonParser.parseToMap(jsonStr, restArraySource.path(), restArraySource.format(), restArraySource.idPath());
+
+        final long importTs = Instant.now().toEpochMilli();
+        final List<SourceRecord> result = new ArrayList<>(data.size());
+        for (final var key : data.keySet()) {
+            final var entry = data.get(key);
+            LOG.debug("creating record id={}, entry={}", key, entry);
             final var record = new SourceRecord(
                     null, // sourcePartition
                     null, // sourceOffset
-                    // Set the Kafka topic
                     restArraySource.topic(),
-                    // Key - you can set the key for the record if needed
-                    null, // key
-                    // Value - set the entry as the value
-                    entry // value
+                    null, // partition
+                    keySchema, // keySchema
+                    key, // key
+                    valueSchema, // valueSchema
+                    entry, // value,
+                    importTs, // timestamp
+                    Collections.emptyList() // headers
             );
             result.add(record);
         }
@@ -78,7 +105,9 @@ public class RestArraySourceTask extends SourceTask {
     @Override
     public void stop() {
         synchronized (this) {
-            timer.stop();
+            if (timer != null) {
+                timer.stop();
+            }
             this.notify();
         }
     }

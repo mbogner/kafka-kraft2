@@ -19,16 +19,26 @@ package dev.mbo.kraft.connector.restimport.json;
 import dev.mbo.kraft.connector.restimport.FileUtil;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class JsonParserTest {
 
+    private String testFile1Str() throws IOException {
+        final var file = "sample-response-formatted.json";
+        return FileUtil.resourceToString(file);
+    }
+
     @Test
     void parse() throws Exception {
-        final var file = "sample-response-formatted.json";
-        final var jsonStr = FileUtil.resourceToString(file);
+        final var result = JsonParser.parse(testFile1Str(), "/", false);
+        assertThat(result).isNotEmpty();
+    }
 
-        final var result = JsonParser.parse(jsonStr, "/", false);
+    @Test
+    void parseToMap() throws Exception {
+        final var result = JsonParser.parseToMap(testFile1Str(), "/", false, "id");
         assertThat(result).isNotEmpty();
     }
 
