@@ -16,10 +16,42 @@
 
 package dev.mbo.kraft.connector.restimport;
 
-public record RestArraySource(
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static dev.mbo.kraft.connector.restimport.RestArrayConfig.FORMAT_CONFIG;
+import static dev.mbo.kraft.connector.restimport.RestArrayConfig.PATH_CONFIG;
+import static dev.mbo.kraft.connector.restimport.RestArrayConfig.POLL_DELAY_CONFIG;
+import static dev.mbo.kraft.connector.restimport.RestArrayConfig.POLL_DELAY_TIMER_CONFIG;
+import static dev.mbo.kraft.connector.restimport.RestArrayConfig.TOPIC_CONFIG;
+import static dev.mbo.kraft.connector.restimport.RestArrayConfig.*;
+
+record RestArraySource(
         String url,
         String topic,
         String path,
-        boolean format
+        boolean format,
+        long pollDelay,
+        long pollDelayTimer,
+        int downloaderBufferSize
 ) {
+
+    public List<Map<String, String>> taskConfigs() {
+        final var configs = new ArrayList<Map<String, String>>();
+
+        final var config = new HashMap<String, String>();
+        config.put(URL_CONFIG, url);
+        config.put(TOPIC_CONFIG, topic);
+        config.put(PATH_CONFIG, path);
+        config.put(FORMAT_CONFIG, String.valueOf(format));
+        config.put(POLL_DELAY_CONFIG, String.valueOf(pollDelay));
+        config.put(POLL_DELAY_TIMER_CONFIG, String.valueOf(pollDelayTimer));
+        config.put(DOWNLOADER_BUFFER_SIZE_BYTES_CONFIG, String.valueOf(downloaderBufferSize));
+        configs.add(config);
+
+        return configs;
+    }
+
 }

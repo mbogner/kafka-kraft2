@@ -33,6 +33,8 @@ val exported: Configuration by configurations.creating {
 dependencies {
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
     api("com.fasterxml.jackson.core:jackson-databind:2.15.3")
+    // https://mvnrepository.com/artifact/commons-io/commons-io
+    api("commons-io:commons-io:2.14.0")
 
     // ------------ PROVIDED ------------
 
@@ -51,6 +53,8 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.24.2")
     // https://mvnrepository.com/artifact/commons-io/commons-io
     testImplementation("commons-io:commons-io:2.14.0")
+    // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
+    testImplementation("ch.qos.logback:logback-classic:1.4.11")
 }
 
 val depFolder = "${layout.buildDirectory.get()}/dependencies"

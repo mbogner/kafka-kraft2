@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.mbo.kraft.connector.restimport;
+package dev.mbo.kraft.connector.restimport.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,35 +22,39 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JsonParser {
+public final class JsonParser {
     private static final Logger LOG = LoggerFactory.getLogger(JsonParser.class);
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     private static final String ARRAY_ROOT_PATH_SEPARATOR = "/";
 
-    public static String[] parse(final String json, final String arrayRootPath, final boolean format) throws JsonProcessingException {
-        var rootNode = OBJECT_MAPPER.readTree(json);
+    public static String[] parse(final String jsonStr, final String arrayRootPath, final boolean format) {
+        try {
+            var rootNode = OBJECT_MAPPER.readTree(jsonStr);
 
-        // go down to configured root
-        final var pathElements = arrayRootPath.split(ARRAY_ROOT_PATH_SEPARATOR);
-        for (final var pathElement : pathElements) {
-            rootNode = rootNode.path(pathElement);
+            // go down to configured root
+            final var pathElements = arrayRootPath.split(ARRAY_ROOT_PATH_SEPARATOR);
+            for (final var pathElement : pathElements) {
+                rootNode = rootNode.path(pathElement);
+            }
+
+            // check that the element is an array
+            if (!rootNode.isArray()) {
+                LOG.warn("no array found under {}", arrayRootPath);
+                return new String[]{};
+            }
+
+            // get all the elements from the array as separate strings
+            final var size = rootNode.size();
+            final var result = new String[size];
+            final var writer = getWriter(format);
+            for (int i = 0; i < size; i++) {
+                result[i] = writer.writeValueAsString(rootNode.get(i));
+            }
+
+            return result;
+        } catch (final JsonProcessingException exc) {
+            throw new JsonParserException("parsing string to json failed:\n" + jsonStr, exc);
         }
-
-        // check that the element is an array
-        if (!rootNode.isArray()) {
-            LOG.warn("no array found under {}", arrayRootPath);
-            return new String[]{};
-        }
-
-        // get all the elements from the array as separate strings
-        final var size = rootNode.size();
-        final var result = new String[size];
-        final var writer = getWriter(format);
-        for (int i = 0; i < size; i++) {
-            result[i] = writer.writeValueAsString(rootNode.get(i));
-        }
-
-        return result;
     }
 
     private static ObjectWriter getWriter(final boolean format) {

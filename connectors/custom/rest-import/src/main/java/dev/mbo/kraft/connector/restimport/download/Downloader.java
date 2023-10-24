@@ -14,22 +14,12 @@
  * limitations under the License.
  */
 
-package dev.mbo.kraft.connector.restimport;
+package dev.mbo.kraft.connector.restimport.download;
 
-import org.junit.jupiter.api.Test;
+import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
+public interface Downloader {
+    String download(String urlStr, int expectedStatusCode) throws DownloadException;
 
-class JsonParserTest {
-
-    @Test
-    void parse() throws Exception {
-        final var file = "sample-response-formatted.json";
-        final var jsonStr = FileUtil.resourceToString(file);
-
-        final var result = JsonParser.parse(jsonStr, "/", false);
-        assertThat(result).isNotEmpty();
-    }
-
-
+    String download(String urlStr, int expectedStatusCode, Map<String, String> headers) throws DownloadException;
 }
