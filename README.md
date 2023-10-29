@@ -34,3 +34,9 @@ See [services.md](services.md) for a service table.
 This project is for local development only. Don't run multiple nodes on the same host.
 
 Regarding scaling read https://www.confluent.io/blog/how-choose-number-topics-partitions-kafka-cluster/.
+
+## Single Node Kafka
+
+The file `[docker-compose-single-node.yml](docker-compose-single-node.yml)` shows a config how to spin up a single node
+kafka setup with the same services as the 3 node cluster in `[docker-compose.yml](docker-compose.yml)`.
+**Attention**: You can't use any replication configs in a single node setup.

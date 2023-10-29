@@ -1,0 +1,109 @@
+version: "3.8"
+services:
+
+  kraft1:
+    image: mbopm/kraft:latest
+    container_name: kraft1
+    hostname: kraft1
+    environment:
+      KAFKA_CLUSTER_ID: "n5FANH2RQ7eJ0E3wuyflmA"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./docker/kraft/config/single-node.properties:/opt/kafka/config/kraft/server.properties:ro
+      - kraft1_data_so:/data/kraft-combined-logs:rw
+    healthcheck:
+      test: nc -z kraft1 9192 || exit 1
+      interval: 2s
+      timeout: 2s
+      retries: 10
+      start_period: 10s
+    ports:
+      - "127.0.0.1:9192:9192"
+
+  kafdrop:
+    image: obsidiandynamics/kafdrop
+    container_name: kafdrop
+    hostname: kafdrop
+    ports:
+      - "127.0.0.1:8084:9000"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    depends_on:
+      kraft1:
+        condition: service_healthy
+    environment:
+      KAFKA_BROKERCONNECT: kraft1:9192
+      JVM_OPTS: "-Xms64M -Xmx128M"
+      SERVER_SERVLET_CONTEXTPATH: "/"
+    healthcheck:
+      test: curl --fail --silent http://localhost:9000 --output /dev/null || exit 1
+      interval: 5s
+      timeout: 2s
+      retries: 20
+      start_period: 30s
+
+  schema-registry:
+    image: confluentinc/cp-schema-registry
+    hostname: schema-registry
+    container_name: schema-registry
+    depends_on:
+      kraft1:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8081:8081"
+    environment:
+      # https://docs.confluent.io/platform/current/schema-registry/installation/config.html
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://kraft1:9192
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+      SCHEMA_REGISTRY_ACCESS_CONTROL_ALLOW_METHODS: GET,POST,PUT,OPTIONS
+      SCHEMA_REGISTRY_ACCESS_CONTROL_ALLOW_ORIGIN: "*"
+    healthcheck:
+      test: nc -z localhost 8081 || exit 1
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  schema-registry-ui:
+    image: landoop/schema-registry-ui
+    hostname: schema-registry-ui
+    container_name: schema-registry-ui
+    ports:
+      - "127.0.0.1:8082:8000"
+    depends_on:
+      schema-registry:
+        condition: service_healthy
+    environment:
+      SCHEMAREGISTRY_URL: http://127.0.0.1:8081
+    healthcheck:
+      test: nc -z localhost 8000 || exit 1
+      interval: 2s
+      timeout: 2s
+      retries: 20
+      start_period: 2s
+
+  kafka-connect-01:
+    build: ./docker/connect
+    image: mbopm/kafka-connect:latest
+    hostname: kafka-connect-01
+    depends_on:
+      kraft1:
+        condition: service_healthy
+      schema-registry:
+        condition: service_healthy
+    volumes:
+      - ./docker/connect/config/connect-single-node.properties:/opt/kafka/config/connect.properties:ro
+      - ./connectors/plugins:/plugins:ro
+      - ./data/kafka-connect-01:/data:rw
+    ports:
+      - "127.0.0.1:8083:8083"
+    healthcheck:
+      test: nc -z localhost 8083 || exit 1
+      interval: 2s
+      timeout: 2s
+      retries: 10
+      start_period: 2s
+
+volumes:
+  kraft1_data_so:
