@@ -3,7 +3,7 @@ FROM ubuntu:latest
 ADD kafka.tgz /opt/
 RUN ln -s /opt/kafka_* /opt/kafka && \
     apt update && \
-    apt install -y openjdk-17-jdk-headless netcat && \
+    apt install -y openjdk-21-jdk-headless netcat && \
     apt clean && apt autoclean && rm -rf /var/lib/apt/lists/*
 
 COPY script/* /opt/kafka/

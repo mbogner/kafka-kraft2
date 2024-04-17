@@ -18,6 +18,7 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 val projectModules = mapOf(
     "sample-spring-boot" to "samples/spring-boot",
+    "sample-kstream" to "samples/kstream",
     "connector-rest-import" to "connectors/custom/rest-import",
 )
 
