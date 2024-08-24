@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (c) 2023.
+# Copyright (c) 2023-2024.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,6 +14,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# see https://downloads.apache.org/kafka/
 wget https://downloads.apache.org/kafka/3.8.0/kafka_2.13-3.8.0.tgz -O kafka.tgz
-cp kafka.tgz ../connect
