@@ -40,3 +40,12 @@ Regarding scaling read https://www.confluent.io/blog/how-choose-number-topics-pa
 The file `[docker-compose-single-node.yml](docker-compose-single-node.yml)` shows a config how to spin up a single node
 kafka setup with the same services as the 3 node cluster in `[docker-compose.yml](docker-compose.yml)`.
 **Attention**: You can't use any replication configs in a single node setup.
+
+# Update
+
+To upgrade kafka go to the [kraft](docker/kraft) directory, adapt the version in
+the [download-kafka.sh](docker/kraft/download-kafka.sh) script, delete the [kafka.tgz](docker/kraft/kafka.tgz) file if
+it exists and the run [kafka.tgz](docker/kraft/kafka.tgz).
+
+After this open the [build-kraft-images.sh](build-kraft-images.sh) script and change the `KAFKA_VERSION` variable to the
+same version you used in the download script. Then run the script to build the new images.

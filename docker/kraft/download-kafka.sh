@@ -14,6 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-wget https://downloads.apache.org/kafka/3.7.0/kafka_2.13-3.7.0.tgz
-mv kafka_2.13-3.7.0.tgz kafka.tgz
+# see https://downloads.apache.org/kafka/
+wget https://downloads.apache.org/kafka/3.8.0/kafka_2.13-3.8.0.tgz -O kafka.tgz
 cp kafka.tgz ../connect
